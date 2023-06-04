@@ -170,28 +170,30 @@ function showNextQuestion() {
 }
 
 function showResult() {
-  quizContainer.style.display = "none";
-  resultContainer.style.display = "block";
-  restart.style.visibility = "visible";
-
-  const percentageScore = (score / quizData.length) * 100;
-  let responseMessage;
-}
-
-// Define the response messages based on the percentage score
-if (percentageScore >= 0 && percentageScore <= 20) {
-    responseMessage =
-      "Oh no! We are all doomed. Maybe it's time to start growing your own oxygen.";
-  } else if (percentageScore > 20 && percentageScore <= 40) {
-    responseMessage =
-      "Well, at least you're not causing immediate planetary catastrophe. But we still have a long way to go.";
-  } else if (percentageScore > 40 && percentageScore <= 60) {
-    responseMessage =
-      "You're making progress! Keep it up and we might just survive long enough for the robots to take over.";
-  } else if (percentageScore > 60 && percentageScore <= 80) {
-    responseMessage =
-      "Impressive! You're on your way to becoming an eco warrior. Keep fighting the good fight!";
-  } else if (percentageScore > 80) {
-    responseMessage = "Congratulations! You're an environmental superstar!";
-  }
+    quizContainer.style.display = "none";
+    resultContainer.style.display = "block";
+    restart.style.visibility = "visible";
   
+    const percentageScore = (score / quizData.length) * 100;
+    let responseMessage;
+  
+    // Define the response messages based on the percentage score
+    if (percentageScore >= 0 && percentageScore <= 20) {
+      responseMessage =
+        "Oh no! We are all doomed. Maybe it's time to start growing your own oxygen.";
+    } else if (percentageScore > 20 && percentageScore <= 40) {
+      responseMessage =
+        "Well, at least you're not causing immediate planetary catastrophe. But we still have a long way to go.";
+    } else if (percentageScore > 40 && percentageScore <= 60) {
+      responseMessage =
+        "You're making progress! Keep it up and we might just survive long enough for the robots to take over.";
+    } else if (percentageScore > 60 && percentageScore <= 80) {
+      responseMessage =
+        "Impressive! You're on your way to becoming an eco warrior. Keep fighting the good fight!";
+    } else if (percentageScore > 80) {
+      responseMessage = "Congratulations! You're an environmental superstar!";
+    }
+  
+    // Display the response message
+    resultContainer.innerText = responseMessage;
+  }
