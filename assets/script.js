@@ -53,3 +53,20 @@ function loadQuestion() {
       optionContainer.appendChild(optionElement);
     });
   }
+
+  //answer selection function
+  function selectOption(optionIndex) {
+    /*
+    This function is called when the user selecs an answer
+    */
+    const currentQuizData = quizData[currentQuestion];
+    // check if the option selected is the answer held in quizData
+    if (optionIndex === currentQuizData.answer) {
+      score ++;
+      console.log('hey that right!');
+      console.log('score: ', score);
+    } else {
+      console.log('got got that wrong!');
+    }
+    showNextQuestion();
+  }
