@@ -70,3 +70,13 @@ function loadQuestion() {
     }
     showNextQuestion();
   }
+
+
+//function to show next question
+  function showNextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
