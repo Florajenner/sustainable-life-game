@@ -178,8 +178,8 @@ function showResult() {
   let responseMessage;
 }
 
-  // Define the response messages based on the percentage score
-  if (percentageScore >= 0 && percentageScore <= 20) {
+// Define the response messages based on the percentage score
+if (percentageScore >= 0 && percentageScore <= 20) {
     responseMessage =
       "Oh no! We are all doomed. Maybe it's time to start growing your own oxygen.";
   } else if (percentageScore > 20 && percentageScore <= 40) {
@@ -191,5 +191,7 @@ function showResult() {
   } else if (percentageScore > 60 && percentageScore <= 80) {
     responseMessage =
       "Impressive! You're on your way to becoming an eco warrior. Keep fighting the good fight!";
-  } else if (percentageScore > 80 &&. {}
+  } else if (percentageScore > 80) {
+    responseMessage = "Congratulations! You're an environmental superstar!";
+  }
   
