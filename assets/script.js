@@ -80,3 +80,12 @@ function loadQuestion() {
     } else {
       showResult();
     }
+
+//function to show result
+    function showResult() {
+        quizContainer.style.display = "none";
+        resultContainer.innerText = `You scored ${score} out of ${quizData.length}`;
+        resultContainer.style.display = 'block';
+        restart.style.visibility = 'visible';
+      }
+      
