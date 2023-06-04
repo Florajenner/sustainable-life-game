@@ -111,89 +111,113 @@ const quizData = [
     }
   ];
   
-const quizContainer = document.getElementById("quiz-container");
-const questionContainer = document.getElementById("question-container");
-const optionContainer = document.getElementById("option-container");
-const submitButton = document.getElementById("submit-btn");
-const resultContainer = document.querySelector("#result-container");
-const restart = document.getElementById("again");
-const progressBar = document.getElementById("myBar");
-
-let currentQuestion = 0;
-let score = 0;
-restart.style.visibility = "hidden";
-
-function loadQuestion() {
-  const currentQuizData = quizData[currentQuestion];
-  questionContainer.innerText = currentQuizData.question;
-  optionContainer.innerHTML = "";
-  currentQuizData.options.forEach((option, index) => {
-    const optionElement = document.createElement("div");
-    optionElement.classList.add("option");
-    optionElement.innerText = option.option;
-    optionElement.addEventListener("click", () => selectOption(index));
-    optionContainer.appendChild(optionElement);
-  });
-}
-
-function selectOption(optionIndex) {
-  const currentQuizData = quizData[currentQuestion];
-  if (optionIndex === currentQuizData.answer) {
-    score++;
-    console.log("hey that's right!");
-    console.log("score: ", score);
-  } else {
-    console.log("got that wrong!");
+  
+  const quizContainer = document.getElementById("quiz-container");
+  const questionContainer = document.getElementById("question-container");
+  const optionContainer = document.getElementById("option-container");
+  const submitButton = document.getElementById("submit-btn");
+  const resultContainer = document.querySelector("#result-container");
+  const restart = document.getElementById("again");
+  const progressBar = document.getElementById("myBar");
+  
+  let currentQuestion = 0;
+  let score = 0;
+  restart.style.visibility = "hidden";
+  
+  function loadQuestion() {
+    const currentQuizData = quizData[currentQuestion];
+    questionContainer.innerText = currentQuizData.question;
+    optionContainer.innerHTML = "";
+    currentQuizData.options.forEach((option, index) => {
+      const optionElement = document.createElement("div");
+      optionElement.classList.add("option");
+      optionElement.innerText = option.option;
+      optionElement.addEventListener("click", () => selectOption(index));
+      optionContainer.appendChild(optionElement);
+    });
   }
-
-  const options = optionContainer.getElementsByClassName("option");
-  Array.from(options).forEach((option) => {
-    option.removeEventListener("click", selectOption);
-    option.classList.add("disabled");
-  });
-
-  showNextQuestion();
-}
-
-function showNextQuestion() {
-  currentQuestion++;
-  if (currentQuestion < quizData.length) {
-    loadQuestion();
-  } else {
-    showResult();
+  
+  function selectOption(optionIndex) {
+    const currentQuizData = quizData[currentQuestion];
+    if (optionIndex === currentQuizData.answer) {
+      score++;
+      console.log('hey that right!');
+      console.log('score: ', score);
+    } else {
+      console.log('got that wrong!');
+    }
+  
+    const options = optionContainer.getElementsByClassName("option");
+    Array.from(options).forEach(option => {
+      option.removeEventListener("click", selectOption);
+      option.classList.add("disabled");
+    });
+  
+    showNextQuestion();
   }
-
-  // Update progress percentage
-  const progressPercentage = (currentQuestion / quizData.length) * 100;
-  progressBar.style.width = progressPercentage + "%";
-  progressBar.innerHTML = progressPercentage + "%";
-}
-
-function showResult() {
+  
+  function showNextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  
+    // Update progress percentage
+    const progressPercentage = (currentQuestion / quizData.length) * 100;
+    progressBar.style.width = progressPercentage + "%";
+    progressBar.innerHTML = progressPercentage + "%";
+  }
+  
+  function showResult() {
     quizContainer.style.display = "none";
-    resultContainer.style.display = "block";
-    restart.style.visibility = "visible";
+    resultContainer.style.display = 'block';
+    restart.style.visibility = 'visible';
   
     const percentageScore = (score / quizData.length) * 100;
     let responseMessage;
   
     // Define the response messages based on the percentage score
     if (percentageScore >= 0 && percentageScore <= 20) {
-      responseMessage =
-        "Oh no! We are all doomed. Maybe it's time to start growing your own oxygen.";
-    } else if (percentageScore > 20 && percentageScore <= 40) {
-      responseMessage =
-        "Well, at least you're not causing immediate planetary catastrophe. But we still have a long way to go.";
-    } else if (percentageScore > 40 && percentageScore <= 60) {
-      responseMessage =
-        "You're making progress! Keep it up and we might just survive long enough for the robots to take over.";
-    } else if (percentageScore > 60 && percentageScore <= 80) {
-      responseMessage =
-        "Impressive! You're on your way to becoming an eco warrior. Keep fighting the good fight!";
-    } else if (percentageScore > 80) {
-      responseMessage = "Congratulations! You're an environmental superstar!";
+      responseMessage = "Oh no! We are all doomed. Maybe it's time to start growing your own oxygen.";
+    } else if (percentageScore > 10 && percentageScore <= 40) {
+      responseMessage = "Well, at least you're not causing immediate planetary catastrophe. But we still have a long way to go.";
+    } else if (percentageScore > 20 && percentageScore <= 60) {
+      responseMessage = "You're making progress! Keep it up and we might just survive long enough for the robots to take over.";
+    } else if (percentageScore > 30 && percentageScore <= 80) {
+      responseMessage = "Impressive! You're on your way to becoming an eco warrior. Keep fighting the good fight!";
+    } else if (percentageScore > 40 && percentageScore <= 90) {
+      responseMessage = "Congratulations, you magnificent eco warrior! With your sustainable superpowers, you're destined to save the world from impending doom.";
     }
   
-    // Display the response message
-    resultContainer.innerText = responseMessage;
+    resultContainer.innerHTML = `
+      <p>You scored ${score} out of ${quizData.length}</p>
+      <p>${responseMessage}</p>
+    `;
   }
+  
+  function shuffleQuizData() {
+    for (let i = quizData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
+    }
+  }
+  
+  function move() {
+    let i = 0;
+    function frame() {
+      if (i == 100) {
+        clearInterval(id);
+      } else {
+        i++;
+        progressBar.style.width = i + "%";
+        progressBar.innerHTML = i + "%";
+      }
+    }
+    let id = setInterval(frame, 10);
+  }
+  
+  shuffleQuizData();
+  loadQuestion();
+  move(); // Start the progress bar animation
