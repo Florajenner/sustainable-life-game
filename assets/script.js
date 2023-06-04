@@ -48,7 +48,7 @@ function loadQuestion() {
     currentQuizData.options.forEach((option, index) => {
       const optionElement = document.createElement("div");
       optionElement.classList.add("option");
-      optionElement.innerText = option.option;
+      optionElement.innerText = option.option; // Access the 'option' property
       optionElement.addEventListener("click", () => selectOption(index));
       optionContainer.appendChild(optionElement);
     });
