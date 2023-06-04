@@ -89,3 +89,11 @@ function loadQuestion() {
         restart.style.visibility = 'visible';
       }
       
+//function to shuffle questions
+      function shuffleQuizData() {
+        for (let i = quizData.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
+        }
+      }
+     
