@@ -176,6 +176,7 @@ function showResult() {
 
   const percentageScore = (score / quizData.length) * 100;
   let responseMessage;
+}
 
   // Define the response messages based on the percentage score
   if (percentageScore >= 0 && percentageScore <= 20) {
@@ -190,4 +191,5 @@ function showResult() {
   } else if (percentageScore > 60 && percentageScore <= 80) {
     responseMessage =
       "Impressive! You're on your way to becoming an eco warrior. Keep fighting the good fight!";
-  } else if (percentageScore > 80 &&.
+  } else if (percentageScore > 80 &&. {}
+  
